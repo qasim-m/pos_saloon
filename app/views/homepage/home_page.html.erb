@@ -1,3 +1,6 @@
 <h1>Hello Usman, Good Day</h1>
 <h1>Your POS is underconstruction, stay calm...</h1>
-<%= link_to 'Sign Out', destroy_user_session_path, method: :delete%>
+<% if current_user.admin? %>
+    <h2> <%= link_to 'Manage Services', services_path%></h2>
+<% end %>
+<h3><%= link_to 'Sign Out', destroy_user_session_path, method: :delete%></h3>

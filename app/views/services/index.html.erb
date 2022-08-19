@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Services</h1>
+
+<table class="table" style="max-width: 15rem;">
+  <thead>
+  </thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Edit</th>
+    </tr>
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%=service.name %></td>
+        <td><%=service.price %></td>
+        <td><%=service.description %></td>
+        <td><%= link_to "Edit", service %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to "New service", new_service_path %>
