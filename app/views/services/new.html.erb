@@ -1,20 +1,4 @@
 <h1>New service</h1>
 
-<%= form_with scope: :service, url: services_path, local: true do |f| %>
+<%= render "form", service: @service %>
 
-  <p>
-    Name: <%= f.text_field :name %>
-  </p>
-  <p>
-    Price: <%= f.text_field :price %>
-  </p>
-  <p>
-    Description: <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end%>
-<div>
-  <%= link_to "Back to services", services_path %>
-</div>

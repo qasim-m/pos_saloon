@@ -1,27 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Services</h1>
-
-<table class="table" style="max-width: 15rem;">
-  <thead>
-  </thead>
+<h2>Services</h2>
+<br>
+<table class="table table-sm table-striped ml-4" style="max-width: 50rem;">
+  <thead class="table-dark">
       <tr>
         <th>Name</th>
         <th>Price</th>
         <th>Description</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
+   </thead >
   <tbody>
     <% @services.each do |service| %>
       <tr>
         <td><%=service.name %></td>
         <td><%=service.price %></td>
         <td><%=service.description %></td>
-        <td><%= link_to "Edit", service %></td>
+        <td><%= link_to "Edit", edit_service_path(service) %></td>
+        <td><%= link_to "Destroy", service_path(service), 
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure! you want to delete this service?"
+            } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<br>
 
 <%= link_to "New service", new_service_path %>

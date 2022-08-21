@@ -17,49 +17,37 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    @service = Service.find(params[:id])
+  end
+
+  def update
+    @service = Service.find(params[:id])
+    if @service.update(service_params)
+      flash[:notice] = "Service updated"
+      redirect_to services_url
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   # POST /services or /services.json
   def create
-    puts "=================......................"
-    puts service_params
-    puts "service_params......................"
-    puts params
-    puts "params......................"
     @service = Service.new(service_params)
 
-    respond_to do |format|
-      if @service.save
-        format.html { redirect_to service_url(@service), notice: "Service was successfully created." }
-        format.json { render :show, status: :created, location: @service }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
-      end
+    if @service.save
+      redirect_to services_url
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /services/1 or /services/1.json
-  def update
-    respond_to do |format|
-      if @service.update(service_params)
-        format.html { redirect_to service_url(@service), notice: "Service was successfully updated." }
-        format.json { render :show, status: :ok, location: @service }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+
 
   # DELETE /services/1 or /services/1.json
   def destroy
     @service.destroy
-
-    respond_to do |format|
-      format.html { redirect_to services_url, notice: "Service was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Service deleted"
+    redirect_to services_url
   end
 
   private

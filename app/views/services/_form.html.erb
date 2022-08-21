@@ -1,17 +1,33 @@
-<%= form_with(model: service) do |form| %>
-  <% if service.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(service.errors.count, "error") %> prohibited this service from being saved:</h2>
+<%= form_with model: service do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+    <% service.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 
-      <ul>
-        <% service.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <div>
+    <%= form.label :price %><br>
+    <%= form.text_field :price %><br>
+    <% service.errors.full_messages_for(:price).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %><br>
+    <% service.errors.full_messages_for(:description).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
 
   <div>
     <%= form.submit %>
   </div>
 <% end %>
+
+<div>
+  <%= link_to "Back to services", services_path %>
+</div>
