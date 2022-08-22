@@ -1,6 +1,7 @@
 class HomepageController < ApplicationController
     
-    def home_page
-    end
+  def home_page
+      @services = Service.all
+  end
 
 end

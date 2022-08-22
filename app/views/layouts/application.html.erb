@@ -13,6 +13,7 @@
   <body>
   <nav class="navbar sticky-top p-3 mb-2 bg-info text-dark">
      <div class= "fs-4 fw-bold"> Najim Aldroob gents saloon </div>
+     <h3><%= link_to 'Sign Out', destroy_user_session_path, method: :delete%></h3>
   </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

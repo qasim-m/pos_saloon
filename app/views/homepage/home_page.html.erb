@@ -1,6 +1,33 @@
-<h1>Hello Usman, Good Day</h1>
-<h1>Your POS is underconstruction, stay calm...</h1>
 <% if current_user.admin? %>
     <h2> <%= link_to 'Manage Services', services_path%></h2>
 <% end %>
-<h3><%= link_to 'Sign Out', destroy_user_session_path, method: :delete%></h3>
+<br>
+<div class="row row-cols-1 row-cols-md-6 g-4">
+  <% @services.each do |service| %>
+    <div id="move" class="col">
+        <div class="card h-100">
+          <img src="https://portenoire.com/wp-content/uploads/2019/06/2019_06_12-Tips-for-Marketing-a-Salon-to-Men-and-Getting-More-Male-Clients-1200x628-1080x628.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+              <h5 class="card-title"><%=service.name%></h5>
+              <p class="card-text"><%=service.description%></p>
+              <h5> Price: <%= " " + service.price.to_s%> </h5>
+              <button id="add"  onclick=addItem() class="btn btn-primary">Add to Cart</button>
+          </div>
+        </div>
+    </div>
+  <%end%>
+</div>
+<br>
+
+
+<script>
+  function addItem(){
+    var li = document.getElementById("move");
+    document.getElementById("added_services").appendChild(li);
+  }
+</script>
+
+<h4>Services added in cart </h4>
+<br>
+<div id="added_services"  class="row row-cols-1 row-cols-md-6 g-4">
+</div>
