@@ -4,77 +4,37 @@
     <h2> <%= link_to 'Manage Services', services_path%></h2>
 <% end %>
 <br>
+<h2 class="section-header">ALL SERVICES</h2>
+<br>
 <div class="row row-cols-1 row-cols-md-6 g-4">
   <% @services.each do |service| %>
-    <div id="move" class="col">
-        <div class="card h-100">
-          <img src="https://portenoire.com/wp-content/uploads/2019/06/2019_06_12-Tips-for-Marketing-a-Salon-to-Men-and-Getting-More-Male-Clients-1200x628-1080x628.jpg" class="card-img-top" alt="...">
+    <div class="col">
+      <div class="card h-100">
+        <img class="shop-item-image-link" src="https://portenoire.com/wp-content/uploads/2019/06/2019_06_12-Tips-for-Marketing-a-Salon-to-Men-and-Getting-More-Male-Clients-1200x628-1080x628.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-              <h5 id="s_name" class="card-title"><%=service.name%></h5>
-              <p class="card-text"><%=service.description%></p>
-              <h5 id="s_price" > Price: <%= " " + service.price.to_s%> </h5>
-              <button onclick=addItem() class="btn btn-primary">Add to Cart</button>
+            <h5 class="card-title shop-item-title "><%=service.name%></h5>
+            <p class="card-text"><%=service.description%></p>
+            <h5 class="shop-item-price" > Price: <%= " " + service.price.to_s%> </h5>
+            <button  class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
           </div>
-        </div>
+      </div>
     </div>
   <%end%>
 </div>
 <br>
-
-
-<script>
-  function addItem(){
-    const div = document.getElementById("move");
-    // const name = div.querySelector('#s_name');
-    // const price = div.querySelector('#s_price');
-
-    let new_li = document.createElement("div")
-    new_li.classList.add('list-group-item d-flex justify-content-between align-items-center');
-    new_li.innerHTML = "name"
-
-    let new_span = document.createElement("span")
-    new_span.classList.add('badge bg-primary rounded-pill');
-    new_span.innerHTML = "price"
-    new_li.appendChild(new_span)
-    document.getElementById("added_services").appendChild(new_li);
-  }
-</script>
-
-
+<br>
 <section class="container content-section">
-  <h2 class="section-header">CART</h2>
-  <div class="cart-row">
-      <span class="cart-item cart-header cart-column">SERVICE</span>
-      <span class="cart-price cart-header cart-column">PRICE</span>
-      <span class="cart-quantity cart-header cart-column">QTY</span>
-  </div>
-  <div class="cart-items">
-      <div class="cart-row">
-          <div class="cart-item cart-column">
-              <img class="cart-item-image" src="Images/Shirt.png" width="100" height="100">
-              <span class="cart-item-title">T-Shirt</span>
-          </div>
-          <span class="cart-price cart-column">$19.99</span>
-          <div class="cart-quantity cart-column">
-              <input class="cart-quantity-input" type="number" value="1">
-              <button class="btn btn-danger" type="button">REMOVE</button>
-          </div>
-      </div>
-      <div class="cart-row">
-          <div class="cart-item cart-column">
-              <img class="cart-item-image" src="Images/Album 3.png" width="100" height="100">
-              <span class="cart-item-title">Album 3</span>
-          </div>
-          <span class="cart-price cart-column">$9.99</span>
-          <div class="cart-quantity cart-column">
-              <input class="cart-quantity-input" type="number" value="2">
-              <button class="btn btn-danger" type="button">REMOVE</button>
-          </div>
-      </div>
-  </div>
-  <div class="cart-total">
-      <strong class="cart-total-title">Total</strong>
-      <span class="cart-total-price">$39.97</span>
-  </div>
-  <button class="btn btn-primary btn-purchase" type="button">CHARGE</button>
+    <h2 class="section-header">CART</h2>
+    <div class="cart-row">
+        <span class="cart-item cart-header cart-column">ITEM</span>
+        <span class="cart-price cart-header cart-column">PRICE</span>
+        <span class="cart-quantity cart-header cart-column">QTY</span>
+    </div>
+    <div class="cart-items">
+    </div>
+    <div class="cart-total">
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">$0</span>
+    </div>
+    <button class="btn btn-primary btn-purchase" type="button">MAKE SALE</button>
 </section>
