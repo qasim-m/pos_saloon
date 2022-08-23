@@ -33,6 +33,7 @@ function purchaseClicked() {
         cartItems.removeChild(cartItems.firstChild)
     }
     updateCartTotal()
+    document.location.reload(true)
 }
 
 function removeCartItem(event) {
