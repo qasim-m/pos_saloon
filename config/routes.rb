@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :services
   devise_for :users
+  post "test_rote/", to: "services#test_rote_fun"
 
   devise_scope :user do  
     get '/users/sign_out' => 'devise/sessions#destroy'     

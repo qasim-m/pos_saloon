@@ -1,8 +1,15 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: %i[ show edit update destroy ]
+  skip_before_action :authenticate_user! [:test_rote_fun]
 
   # GET /services or /services.json
+  def test_rote_fun
+    puts "kkkkkkkkkkkkkkkkkkkkkkkkkk"
+    byebug
+  end
   def index
+    puts "kkkkkkkkkkkkkkkkkkkkkkkkkk"
+    byebug
     @services = Service.all
   end
 
