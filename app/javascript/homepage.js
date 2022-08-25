@@ -1,33 +1,56 @@
+// import  FetchRequest from 'application.js'
+// import { get, post } from "@rails/request.js";
+
 if (document.readyState == 'loading') {
 	document.addEventListener('DOMContentLoaded', ready)
 } else {
 	ready()
 }
-import {post} from 'application.js'
+
 async function makeSale()
   {
-    console.log("sending request")
-    const url = 'localhost:3000/test_rote'
-	debugger;
-	const response = await post(url, { body: JSON.stringify({ name: 'Request.JS' }) })
-	console.log("response")
-	console.log(response)
+    // console.log("sending request")
+    // const url = 'localhost:3000/test_rote'
+	// debugger;
+	// const response = await post(url, { body: JSON.stringify({ "name": 'Request.JS' }) })
+	// console.log("response")
+	// console.log(response)
+
+
+	// console.log("sending request")
+	// const url = 'localhost:3000/test_rote'
+	// console.log("sending request 11")
+	// debugger;
+	// console.log("passed debugger")
+	// let request = new FetchRequest('post', url, { body: JSON.stringify({ name: 'Request.JS' }) })
+	// console.log("sending request 22")
+	// let response = await request.perform()
+	// console.log("response")
+	// console.log(response)
+	// if (response.ok) {
+	// 	const body = await response.text
+	// 	// Do whatever do you want with the response body
+	// 	// You also are able to call `response.html` or `response.json`, be aware that if you call `response.json` and the response contentType isn't `application/json` there will be raised an error.
+	// }
+	
+
+
+
+
+
     // fetch(url, {
     //   method: "POST",
-    //   headers: {
-    //     // "X-CSRF-Token": csrfToken,          // 👈👈👈 you need to set token
-    //     "Content-Type": "application/json", // 👈👈👈 To send json in body, specify this
-    //      Accept: "application/json",         // 👈👈👈 Specify the response to be returned as json. For api only mode, this may not be needed
-    //   },
+    // //   headers: {
+    // //     // "X-CSRF-Token": csrfToken,          // 👈👈👈 you need to set token
+    // //     "Content-Type": "application/json", // 👈👈👈 To send json in body, specify this
+    // //      Accept: "application/json",         // 👈👈👈 Specify the response to be returned as json. For api only mode, this may not be needed
+    // //   },
     //   body: JSON.stringify({abc: "fff" }),
     // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("Success:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
+	// console.log(response);
+	// debugger;
+	// console.log("passed debugger")
+
 
     // console.log("sending request")
     // const url = 'http://127.0.0.1:3000/test_rote'
@@ -41,17 +64,33 @@ async function makeSale()
     // }).then(date=> console.log(date)).catch(err=>console.log(err))
 
 
+	// Create an XMLHttpRequest object
+	const xhttp = new XMLHttpRequest();
+
+	// Define a callback function
+	xhttp.onload = function() {
+		console.log("in fun")
+	}
+
+	// Send a request
+	const url = 'http://127.0.0.1:3000/test_rote'
+	xhttp.open("POST", url);
+	console.log("sending xhttp")
+	xhttp.send();
 
 
-
-
+	// console.log("sending xhttp")
     // const xhttp = new XMLHttpRequest();
-    // xhttp.open("get", "http://127.0.0.1:3000/test_rote", false);
+	// const url = 'http://127.0.0.1:3000/test_rote'
+    // xhttp.open("get", url, false);
+
     // // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     // console.log("sending xhttp")
     // xhttp.send();
     // console.log(xhttp);
-    debugger;
+	// debugger;
+	// console.log("passed debugger")
+   
 
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
@@ -101,13 +140,13 @@ function ready() {
 
 function purchaseClicked() {
 	makeSale()
-	alert('Thank you for your purchase')
-	var cartItems = document.getElementsByClassName('cart-items')[0]
-	while (cartItems.hasChildNodes()) {
-		cartItems.removeChild(cartItems.firstChild)
-	}
-	updateCartTotal()
-	document.location.reload(true)
+	// alert('Thank you for your purchase')
+	// var cartItems = document.getElementsByClassName('cart-items')[0]
+	// while (cartItems.hasChildNodes()) {
+	// 	cartItems.removeChild(cartItems.firstChild)
+	// }
+	// updateCartTotal()
+	// document.location.reload(true)
 }
 
 function removeCartItem(event) {
