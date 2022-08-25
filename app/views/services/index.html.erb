@@ -1,0 +1,36 @@
+<h5> <%= link_to " Add New service", new_service_path %> </h5>
+<br>
+<h5> <%= link_to " Back to HomePage", root_path %> </h5>
+<br>
+<h4>All Services</h4>
+
+<br>
+<table class="table table-sm table-striped ml-4" style="max-width: 50rem;">
+  <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+   </thead >
+  <tbody>
+    <% @services.each do |service| %>
+      <tr>
+        <td><%=service.name %></td>
+        <td><%=service.price %></td>
+        <td><%=service.description %></td>
+        <td><%= link_to "Edit", edit_service_path(service) %></td>
+        <td><%= link_to "Destroy", service_path(service), 
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure! you want to delete this service?"
+            } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
