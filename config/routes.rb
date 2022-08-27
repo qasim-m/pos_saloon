@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root "homepage#home_page"
   resources :services
   devise_for :users
+
   post "make_a_sale/", to: "sales#make_a_sale"
+  get "sales/", to: "sales#sales_list"
 
 end

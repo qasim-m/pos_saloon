@@ -15,4 +15,9 @@ class SalesController < ApplicationController
     end
   end
   
+  def sales_list
+    @sales = Sale.includes(:customer, :user).all
+  end
+
+
 end
