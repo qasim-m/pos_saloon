@@ -3,9 +3,7 @@ class ServicesController < ApplicationController
   # skip_before_action :authenticate_user! [:test_rote_fun]
 
   # GET /services or /services.json
-  def test_rote_fun
-    byebug
-  end
+
 
   def index
     @services = Service.all

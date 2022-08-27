@@ -1,114 +1,72 @@
-// import  FetchRequest from 'application.js'
-// import { get, post } from "@rails/request.js";
-
 if (document.readyState == 'loading') {
 	document.addEventListener('DOMContentLoaded', ready)
 } else {
 	ready()
 }
 
-async function makeSale()
+async function purchaseClicked()
   {
-    // console.log("sending request")
-    // const url = 'localhost:3000/test_rote'
-	// debugger;
-	// const response = await post(url, { body: JSON.stringify({ "name": 'Request.JS' }) })
-	// console.log("response")
-	// console.log(response)
-
-
-	// console.log("sending request")
-	// const url = 'localhost:3000/test_rote'
-	// console.log("sending request 11")
-	// debugger;
-	// console.log("passed debugger")
-	// let request = new FetchRequest('post', url, { body: JSON.stringify({ name: 'Request.JS' }) })
-	// console.log("sending request 22")
-	// let response = await request.perform()
-	// console.log("response")
-	// console.log(response)
-	// if (response.ok) {
-	// 	const body = await response.text
-	// 	// Do whatever do you want with the response body
-	// 	// You also are able to call `response.html` or `response.json`, be aware that if you call `response.json` and the response contentType isn't `application/json` there will be raised an error.
-	// }
-	
-
-
-
-
-
-    // fetch(url, {
-    //   method: "POST",
-    // //   headers: {
-    // //     // "X-CSRF-Token": csrfToken,          // 👈👈👈 you need to set token
-    // //     "Content-Type": "application/json", // 👈👈👈 To send json in body, specify this
-    // //      Accept: "application/json",         // 👈👈👈 Specify the response to be returned as json. For api only mode, this may not be needed
-    // //   },
-    //   body: JSON.stringify({abc: "fff" }),
-    // })
-	// console.log(response);
-	// debugger;
-	// console.log("passed debugger")
-
-
-    // console.log("sending request")
-    // const url = 'http://127.0.0.1:3000/test_rote'
-    // const user = {name: "qasim"}
-    // axios({
-    //   method: 'post',
-    //   url: url,
-    //   data: {
-    //     user
-    //   }
-    // }).then(date=> console.log(date)).catch(err=>console.log(err))
-
-
-	// Create an XMLHttpRequest object
-	const xhttp = new XMLHttpRequest();
-
-	// Define a callback function
-	xhttp.onload = function() {
-		console.log("in fun")
-	}
-
-	// Send a request
-	const url = 'http://127.0.0.1:3000/test_rote'
-	xhttp.open("POST", url);
-	console.log("sending xhttp")
-	xhttp.send();
-
-
-	// console.log("sending xhttp")
-    // const xhttp = new XMLHttpRequest();
-	// const url = 'http://127.0.0.1:3000/test_rote'
-    // xhttp.open("get", url, false);
-
-    // // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // console.log("sending xhttp")
-    // xhttp.send();
-    // console.log(xhttp);
-	// debugger;
-	// console.log("passed debugger")
-   
-
-    var cartItemContainer = document.getElementsByClassName('cart-items')[0]
+	var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')
+	const sales_data = [];
+	var total_amount = 0;
     for (var i = 0; i < cartRows.length; i++) {
       var cartRow = cartRows[i]
-      var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
-      var priceElement = cartRow.getElementsByClassName('cart-price-input')[0]
+	    var priceElement = cartRow.getElementsByClassName('cart-price-input')[0]
       var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
+      var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
       var price = parseFloat(priceElement.value)
       var quantity = quantityElement.value
- 
-      console.log(i)
-      console.log(title)
-      console.log(price)
-      console.log(quantity)
+      total_amount += price
+      const sale = {title: title, price: price, quantity: quantity};
+      sales_data.push(sale);
     }
-  }
 
+	const url = "http://127.0.0.1:3000/make_a_sale";
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {         
+			"Content-Type": "application/json",
+			Accept: "application/json",       
+		},
+		
+		body: JSON.stringify({sales_data: sales_data, total_amount: total_amount, payment_method: "cash", customer_data: []}) ,
+		})
+
+	debugger;
+
+	if (response.status == 204) {
+	    alert('Hy congratulations, you made new sale..!');
+		var cartItems = document.getElementsByClassName('cart-items')[0]
+		while (cartItems.hasChildNodes()) {
+			cartItems.removeChild(cartItems.firstChild)
+		}
+		updateCartTotal()
+		document.location.reload(true)
+    }
+	else {
+		alert('Error in sale creation..!!!');
+	}
+
+
+
+	// .then((response) => response.status == "200")
+    // .then((result) => {
+	// 	console.log(result);
+	// 	alert('Hy congratulations, you made new sale..!');
+	// 	var cartItems = document.getElementsByClassName('cart-items')[0]
+	// 	while (cartItems.hasChildNodes()) {
+	// 		cartItems.removeChild(cartItems.firstChild)
+	// 	}
+	// 	updateCartTotal()
+	// 	document.location.reload(true)
+    // })
+    // .catch((error) => {
+	// 	console.log(error);
+	// 	alert('Error in sale creation..!!!');
+    // });
+   
+}
 
 function ready() {
 	var removeCartItemButtons = document.getElementsByClassName('btn-danger')
@@ -138,16 +96,6 @@ function ready() {
 	document.getElementsByClassName('btn-purchase')[0].addEventListener('click', purchaseClicked)
 }
 
-function purchaseClicked() {
-	makeSale()
-	// alert('Thank you for your purchase')
-	// var cartItems = document.getElementsByClassName('cart-items')[0]
-	// while (cartItems.hasChildNodes()) {
-	// 	cartItems.removeChild(cartItems.firstChild)
-	// }
-	// updateCartTotal()
-	// document.location.reload(true)
-}
 
 function removeCartItem(event) {
 	var buttonClicked = event.target
