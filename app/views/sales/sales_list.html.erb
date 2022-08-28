@@ -1,3 +1,10 @@
+<script>  
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready)
+  } else {
+    ready()
+  }
+</script>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script>
   $(document).ready(function(){
@@ -21,8 +28,8 @@
       <th>Date/Time</th>
       <th>Payment Type</th>
       <th>Total Amount</th>
-      <th>Customer Name</th>
-      <th>Customer Phone</th>
+      <th>Cust. Name</th>
+      <th>Cust. Phone</th>
       <th>Show/Hide</th>
     </tr>
     <% @sales.each_with_index do |sale, idx| %>

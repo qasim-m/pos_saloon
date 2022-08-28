@@ -1,7 +1,7 @@
 class SalesController < ApplicationController
 
   def make_a_sale
-    customer = Customer.create!()
+    customer = Customer.create!(name: params[:customer_name].to_s.strip, phone: params[:customer_phone].to_s.strip)
     sale = Sale.new
     sale.total = params.require(:total_amount)
     sale.payment_methode = params.require(:payment_method)

@@ -12,7 +12,7 @@ async function purchaseClicked()
 	var total_amount = 0;
     for (var i = 0; i < cartRows.length; i++) {
       var cartRow = cartRows[i]
-	    var priceElement = cartRow.getElementsByClassName('cart-price-input')[0]
+	  var priceElement = cartRow.getElementsByClassName('cart-price-input')[0]
       var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]
       var title = cartRow.getElementsByClassName('cart-item-title')[0].innerText
       var price = parseFloat(priceElement.value)
@@ -22,6 +22,18 @@ async function purchaseClicked()
       sales_data.push(sale);
     }
 
+	if (total_amount == 0){
+		alert('Total amount should not zero..!!!');
+		updateCartTotal()
+		document.location.reload(true)
+		return
+	}
+
+	const extraDate = document.getElementById('extra_data')
+	const cus_name = extraDate.getElementsByClassName('cus_name')[0].value
+	const cus_phone = extraDate.getElementsByClassName('cus_phone')[0].value
+	const cus_pay_method = extraDate.getElementsByClassName('cus_pay_method')[0].value
+
 	const url = "http://127.0.0.1:3000/make_a_sale";
 	const response = await fetch(url, {
 		method: "POST",
@@ -30,7 +42,7 @@ async function purchaseClicked()
 			Accept: "application/json",       
 		},
 		
-		body: JSON.stringify({sales_data: sales_data, total_amount: total_amount, payment_method: "cash", customer_data: []}) ,
+		body: JSON.stringify({sales_data: sales_data, total_amount: total_amount, payment_method: cus_pay_method, customer_name: cus_name, customer_phone: cus_phone}) ,
 		})
 
 	if (response.status == 204) {
@@ -45,25 +57,7 @@ async function purchaseClicked()
 	else {
 		alert('Error in sale creation..!!!');
 	}
-
-
-
-	// .then((response) => response.status == "200")
-    // .then((result) => {
-	// 	console.log(result);
-	// 	alert('Hy congratulations, you made new sale..!');
-	// 	var cartItems = document.getElementsByClassName('cart-items')[0]
-	// 	while (cartItems.hasChildNodes()) {
-	// 		cartItems.removeChild(cartItems.firstChild)
-	// 	}
-	// 	updateCartTotal()
-	// 	document.location.reload(true)
-    // })
-    // .catch((error) => {
-	// 	console.log(error);
-	// 	alert('Error in sale creation..!!!');
-    // });
-   
+ 
 }
 
 function ready() {
