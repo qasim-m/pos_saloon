@@ -23,6 +23,14 @@
     <% end %>
   </div>
 
+    <div>
+    <%= form.label :image %><br>
+    <%= form.text_field :image %><br>
+    <% service.errors.full_messages_for(:image).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
   <div>
     <br>
     <%= form.submit %>

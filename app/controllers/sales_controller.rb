@@ -18,8 +18,13 @@ class SalesController < ApplicationController
   def sales_list
     # startDate, endDate = params.require(:search).permit(:date_range)[:date_range].split("to").map{|e| Date.parse(e)}
     # @sales = Sale.includes(:customer, :user, sale_services: :service).where(created_at: startDate..endDate)
-    searchDate = Date.parse(params.require(:search).values.join("/")) rescue Date.today
-    @sales = Sale.includes(:customer, :user, sale_services: :service).where("DATE(created_at) =  '#{searchDate}'")
+    if current_user.admin?
+      searchDate = Date.parse(params.require(:search).values.join("/")) rescue Date.today
+      @sales = Sale.includes(:customer, :user, sale_services: :service).where("DATE(created_at) =  '#{searchDate}'")
+    else 
+      searchDate = Date.parse(params.require(:search).values.join("/")) rescue Date.today
+      @sales = Sale.includes(:customer, :user, sale_services: :service).where(user_id: current_user.id).where("DATE(created_at) =  '#{searchDate}'")
+    end
   end
 
 

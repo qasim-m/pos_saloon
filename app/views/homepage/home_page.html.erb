@@ -12,7 +12,7 @@
   <% @services.each do |service| %>
     <div class="col">
       <div class="card h-100">
-        <img class="shop-item-image-link" src="https://portenoire.com/wp-content/uploads/2019/06/2019_06_12-Tips-for-Marketing-a-Salon-to-Men-and-Getting-More-Male-Clients-1200x628-1080x628.jpg" class="card-img-top" alt="...">
+        <img class="shop-item-image-link" src=<%=service.image%> class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title shop-item-title "><%=service.name%></h5>
             <p class="card-text"><%=service.description%></p>
