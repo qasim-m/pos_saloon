@@ -14,7 +14,7 @@
 </script>
 
 <table class="table table-striped-columns" style="max-width: 60rem;">
-    <tr class="table-success">
+    <tr class="table-info">
       <th>Provider Name</th>
       <th>Date/Time</th>
       <th>Payment Type</th>
@@ -34,13 +34,13 @@
         <td><a href="#" class="toggler" data-prod-cat= <%(idx +1).to_s%> >+</a></td>
       </tr>
      
-      <tr class="table-info cat<%(idx +1).to_s%>" style="display:none">
+      <tr class="table-success cat<%(idx +1).to_s%>" style="display:none">
         <th>Service Name</th>
         <th>Qty</th>
         <th>Price</th>
       </tr>
       <% sale.sale_services.each do |sale_service| %>
-        <tr class="table-light cat<%(idx +1).to_s%>" style="display:none">
+        <tr class= "cat<%(idx +1).to_s%>" style="display:none">
           <td><%= sale_service.service.name %> </td>
           <td><%= sale_service.price %></td>
           <td><%= sale_service.qty %></td>

@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag "homepage" %>
 <%= javascript_include_tag "homepage", "data-turbolinks-track" => true  %>
 <% if current_user.admin? %>
-    <h2> <%= link_to 'Manage Services', services_path%></h2>
+    <h4> <%= link_to 'Manage Services', services_path%></h4>
 <% end %>
-<h5> <%= link_to "Check Your Sales", sales_path %> </h5>
+<h4> <%= link_to "Check Your Sales", sales_path %> </h4>
 <br>
 <br>
 <h2 class="section-header">ALL SERVICES</h2>
