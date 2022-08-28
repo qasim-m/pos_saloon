@@ -16,7 +16,8 @@ class SalesController < ApplicationController
   end
   
   def sales_list
-    @sales = Sale.includes(:customer, :user, sale_services: :service).all
+    startDate, endDate = params.require(:search).permit(:date_range)[:date_range].split("to").map{|e| Date.parse(e)}
+    @sales = Sale.includes(:customer, :user, sale_services: :service).where(created_at: startDate..endDate)
   end
 
 

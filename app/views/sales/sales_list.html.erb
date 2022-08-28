@@ -1,5 +1,4 @@
-<%= javascript_include_tag "daterangepicker_initializer.js" %>
-
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 <script>
   $(document).ready(function(){
       $(".toggler").click(function(e){
@@ -13,7 +12,8 @@
 <br>
 <h4>Your Sales</h4>
 <br>
-<div style="background: #fff; cursor: pointer; padding: 5px 10px; border: 2px solid #ccc; width: 30%" ><%= render 'filter_form' %> </div>
+
+<%= render 'filter_form' %>
 
 <table class="table table-striped-columns" style="max-width: 60rem;">
     <tr class="table-info">

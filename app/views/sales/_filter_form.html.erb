@@ -1,7 +1,7 @@
-<%= form_for(:search, class: 'form-inline', url: sales_path, method: :get) do |form| %>
+<%= form_for(:search, class: 'form-inline', url: sales_path, method: :get, remote: true) do |form| %>
   <div class="form-group">
-    <%= form.label :created_at %>
-    <%= form.text_field :created_at, class: 'form-control', data: { behavior: 'daterangepicker' } %>
+    <%= form.label "Date Range" %>
+    <%= form.text_field :date_range, as: :string%>
   </div>
   <%= form.submit "Search", class: 'btn btn-success' %>
 <% end %>
