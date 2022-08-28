@@ -33,8 +33,6 @@ async function purchaseClicked()
 		body: JSON.stringify({sales_data: sales_data, total_amount: total_amount, payment_method: "cash", customer_data: []}) ,
 		})
 
-	debugger;
-
 	if (response.status == 204) {
 	    alert('Hy congratulations, you made new sale..!');
 		var cartItems = document.getElementsByClassName('cart-items')[0]

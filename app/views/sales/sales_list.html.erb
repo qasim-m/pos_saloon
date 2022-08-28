@@ -1,31 +1,50 @@
-<h5> <%= link_to " Back to HomePage", root_path %> </h5>
+<h4> <%= link_to " Back to HomePage", root_path %> </h4>
 <br>
 <h4>Your Sales</h4>
-
 <br>
-<table class="table table-sm table-striped ml-4" style="max-width: 50rem;">
-  <thead class="table-dark">
-      <tr>
-        <th>Provider Name</th>
-        <th>Date/Time</th>
-        <th>Payment Type</th>
-        <th>Total Amount</th>
-        <th>Customer Name</th>
-        <th>Customer Phone</th>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script>
+  $(document).ready(function(){
+      $(".toggler").click(function(e){
+          e.preventDefault();
+          $('.cat'+$(this).attr('data-prod-cat')).toggle();
+      });
+  });
+</script>
+
+<table class="table table-striped-columns" style="max-width: 60rem;">
+    <tr class="table-success">
+      <th>Provider Name</th>
+      <th>Date/Time</th>
+      <th>Payment Type</th>
+      <th>Total Amount</th>
+      <th>Customer Name</th>
+      <th>Customer Phone</th>
+      <th>Show/Hide</th>
     </tr>
-   </thead >
-  <tbody>
-    <% @sales.each do |sale| %>
-      <tr>
+    <% @sales.each_with_index do |sale, idx| %>
+      <tr class="table-secondary">
         <td><%=[sale.user.first_name , sale.user.last_name].join(" ") %></td>
         <td><%= DateTime.parse(sale.created_at.to_s).strftime("%d-%m-%Y %I:%M %p") %></td>
         <td><%= sale.payment_methode %> </td>
         <td><%= sale.total %> </td>
         <td><%= sale.customer.name %></td>
-        <td><%= sale.customer.phone %></td>
+        <td ><%= sale.customer.phone %></td>
+        <td><a href="#" class="toggler" data-prod-cat= <%(idx +1).to_s%> >+</a></td>
       </tr>
+     
+      <tr class="table-info cat<%(idx +1).to_s%>" style="display:none">
+        <th>Service Name</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+      <% sale.sale_services.each do |sale_service| %>
+        <tr class="table-light cat<%(idx +1).to_s%>" style="display:none">
+          <td><%= sale_service.service.name %> </td>
+          <td><%= sale_service.price %></td>
+          <td><%= sale_service.qty %></td>
+        </tr>
+      <% end %>
     <% end %>
-  </tbody>
 </table>
-<br>
-

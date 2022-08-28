@@ -11,12 +11,12 @@ class SalesController < ApplicationController
     sales_data_list = params.require(:sales_data)
     sales_data_list.each do |sale_data|
       service = Service.find_by(name: sale_data[:title])
-      SaleService.create!(service_id: service.id, sale_id: sale.id)
+      SaleService.create!(service_id: service.id, sale_id: sale.id, qty: sale_data[:quantity], price: sale_data[:price])
     end
   end
   
   def sales_list
-    @sales = Sale.includes(:customer, :user).all
+    @sales = Sale.includes(:customer, :user, sale_services: :service).all
   end
 
 
