@@ -10,13 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_19_070719) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_28_150348) do
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sale_services", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sale_id"
+    t.integer "service_id"
+    t.integer "qty"
+    t.integer "price"
+    t.index ["sale_id"], name: "index_sale_services_on_sale_id"
+    t.index ["service_id"], name: "index_sale_services_on_service_id"
+  end
+
+  create_table "sales", force: :cascade do |t|
+    t.integer "total"
+    t.string "payment_methode", default: "cash", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "customer_id"
+    t.index ["customer_id"], name: "index_sales_on_customer_id"
+    t.index ["user_id"], name: "index_sales_on_user_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
     t.integer "price"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_19_070719) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "sale_services", "sales"
+  add_foreign_key "sale_services", "services"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "sales", "users"
 end

@@ -1,16 +1,12 @@
 <%= stylesheet_link_tag "homepage" %>
 <%= javascript_include_tag "homepage", "data-turbolinks-track" => true  %>
-<% if current_user.admin? %>
-    <h2> <%= link_to 'Manage Services', services_path%></h2>
-<% end %>
-<br>
-<h2 class="section-header">ALL SERVICES</h2>
+<h1 class="section-header">ALL SERVICES</h1>
 <br>
 <div class="row row-cols-1 row-cols-md-6 g-4">
   <% @services.each do |service| %>
     <div class="col">
       <div class="card h-100">
-        <img class="shop-item-image-link" src="https://portenoire.com/wp-content/uploads/2019/06/2019_06_12-Tips-for-Marketing-a-Salon-to-Men-and-Getting-More-Male-Clients-1200x628-1080x628.jpg" class="card-img-top" alt="...">
+        <img class="shop-item-image-link" src=<%=service.image%> class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title shop-item-title "><%=service.name%></h5>
             <p class="card-text"><%=service.description%></p>
@@ -36,5 +32,17 @@
         <strong class="cart-total-title">Total</strong>
         <span class="cart-total-price">$0</span>
     </div>
+
+    <div id="extra_data" class="input-group mb-8">
+      <input type="text" class="form-control cus_name" placeholder="Customer Name">
+      <span class="input-group-text">&#128222;</span>
+      <input type="text" class="form-control cus_phone" placeholder="Phone" >
+      <span class="input-group-text">&#128420;</span>
+      <select class="form-select cus_pay_method">
+        <option  value="Cash" selected>Cash</option>
+          <option value="Card" >Card</option>
+      </select>
+    </div>
+
     <button class="btn btn-primary btn-purchase" type="button">MAKE SALE</button>
 </section>

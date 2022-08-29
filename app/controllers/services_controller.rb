@@ -1,7 +1,10 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: %i[ show edit update destroy ]
+  # skip_before_action :authenticate_user! [:test_rote_fun]
 
   # GET /services or /services.json
+
+
   def index
     @services = Service.all
   end
@@ -58,6 +61,6 @@ class ServicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def service_params
-      params.require(:service).permit(:name,:description,:price)
+      params.require(:service).permit(:name,:description,:price, :image)
     end
 end
