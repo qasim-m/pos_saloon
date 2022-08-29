@@ -1,0 +1,56 @@
+<script>  
+if (document.readyState == 'loading') {
+    document.addEventListener('DOMContentLoaded', ready)
+  } else {
+    ready()
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script>
+  $(document).ready(function(){
+      $(".toggler").click(function(e){
+          e.preventDefault();
+          $('.cat'+$(this).attr('data-prod-cat')).toggle();
+      });
+  });
+</script>
+<h2 class="section-header">YOUR SALES</h2>
+<br>
+
+<%= render 'filter_form' %>
+
+<table class="table table-striped-columns" style="max-width: 60rem;">
+    <tr class="table-info">
+      <th>Provider Name</th>
+      <th>Date/Time</th>
+      <th>Payment Type</th>
+      <th>Total Amount</th>
+      <th>Cust. Name</th>
+      <th>Cust. Phone</th>
+      <th>Show/Hide</th>
+    </tr>
+    <% @sales.each_with_index do |sale, idx| %>
+      <tr class="table-secondary">
+        <td><%=[sale.user.first_name , sale.user.last_name].join(" ") %></td>
+        <td><%= DateTime.parse(sale.created_at.to_s).strftime("%d-%m-%Y %I:%M %p") %></td>
+        <td><%= sale.payment_methode %> </td>
+        <td><%= sale.total %> </td>
+        <td><%= sale.customer.name %></td>
+        <td ><%= sale.customer.phone %></td>
+        <td><a href="#" class="toggler" data-prod-cat= <%(idx +1).to_s%> >+</a></td>
+      </tr>
+     
+      <tr class="table-success cat<%(idx +1).to_s%>" style="display:none">
+        <th>Service Name</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+      <% sale.sale_services.each do |sale_service| %>
+        <tr class= "cat<%(idx +1).to_s%>" style="display:none">
+          <td><%= sale_service.service.name %> </td>
+          <td><%= sale_service.price %></td>
+          <td><%= sale_service.qty %></td>
+        </tr>
+      <% end %>
+    <% end %>
+</table>
